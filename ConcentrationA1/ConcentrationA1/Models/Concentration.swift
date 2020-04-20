@@ -39,7 +39,7 @@ class Concentration {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
-                    score += 2
+                    score += 2  // TODO: Add scoring for Faster Times using `Date()`
                 } else {
                     checkScore(for: [index, matchIndex])
                 }
@@ -80,7 +80,7 @@ class Concentration {
         }
         return shuffledDeck
     }
-    
+
     private func checkScore(for indecies: [Int]){
         for index in indecies {
             if !cards[index].hasBeenSeen {
