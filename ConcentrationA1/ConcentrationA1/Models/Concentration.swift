@@ -41,7 +41,7 @@ class Concentration {
                     cards[index].isMatched = true
                     score += 2
                 } else {
-                    checkScore(for: [cards[index], cards[matchIndex]])
+                    checkScore(for: [index, matchIndex])
                 }
                 cards[index].isFacedUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
@@ -62,6 +62,7 @@ class Concentration {
         for index in cards.indices {
             cards[index].isFacedUp = false
             cards[index].isMatched = false
+            cards[index].hasBeenSeen = false
         }
         cards = shuffleCards()
         score = 0
@@ -80,12 +81,12 @@ class Concentration {
         return shuffledDeck
     }
     
-    private func checkScore(for cards: [Card]){
-        for card in cards {
-            if seenCards.contains(card) {
-                score -= 1
+    private func checkScore(for indecies: [Int]){
+        for index in indecies {
+            if !cards[index].hasBeenSeen {
+                cards[index].hasBeenSeen = true
             } else {
-                seenCards.append(card)
+                score -= 1
             }
         }
     }
