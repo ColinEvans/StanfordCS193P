@@ -77,7 +77,7 @@ class ConcentrationViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : #colorLiteral(red: 1, green: 0.1961485147, blue: 0.3654072285, alpha: 1)
             }
         }
         flipCountLabel.text = "Flips: \(game.flips)"
