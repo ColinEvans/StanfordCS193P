@@ -22,7 +22,7 @@ enum GameThemes {
 
 
 /// View controller managing the UI for the gameboard
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet var cardButtonViews: [UIButton]!
@@ -30,9 +30,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreLabel: UILabel!
     
     // MARK: - Class Variables
-    /// doesn't initalize the value until it's called
     var game: Concentration!
-    private var emojiChoices = ViewController.themes.randomElement() ?? GameThemes.Halloween
+    private var emojiChoices = ConcentrationViewController.themes.randomElement() ?? GameThemes.Halloween
     private var emoji = [Int: String]()
     
     // Possible themes loaded into the game
@@ -62,7 +61,7 @@ class ViewController: UIViewController {
     /// Action that halts the current progress and restarts the game
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
-        emojiChoices = ViewController.themes.randomElement() ?? GameThemes.Halloween
+        emojiChoices = ConcentrationViewController.themes.randomElement() ?? GameThemes.Halloween
         emoji.removeAll()
         updateViewFromModel()
     }
@@ -78,7 +77,7 @@ class ViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
         }
         flipCountLabel.text = "Flips: \(game.flips)"
