@@ -14,13 +14,23 @@ class Concentration {
     var cards = [Card]()
     var score = 0
     var flips = 0
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    
+    // MARK: - Private Vars
+    private var scoreTimer: Date
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
-            let faceUpCards = cards.enumerated().filter({$1.isFacedUp}).map {$0.element}
-            if faceUpCards.count == 1 {
-                return cards.firstIndex(of: faceUpCards.first!)
+            var flippedIndex: Int?
+            for (index, card) in cards.enumerated() {
+                if card.isFacedUp {
+                    if flippedIndex == nil {
+                        flippedIndex = index
+                    } else {
+                        flippedIndex = nil
+                        break
+                    }
+                }
             }
-            return nil
+            return flippedIndex
         }
 
         set {
@@ -43,6 +53,7 @@ class Concentration {
             // Array (Struct) makes a copy when appending - not a pointer to the data
             cards += [card, card]
         }
+        scoreTimer = Date(timeIntervalSinceNow: 0.0)
         cards = shuffleCards()
     }
 
@@ -56,7 +67,7 @@ class Concentration {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
-                    score += 2  // TODO: Add scoring for Faster Times using `Date()`
+                    score +=  turnTimeIntoScore()
                 } else {
                     checkScore(for: [index, matchIndex])
                 }
@@ -100,5 +111,21 @@ class Concentration {
                 score -= 1
             }
         }
+    }
+    
+    private func turnTimeIntoScore() -> Int {
+        let checkTimeDate = Date(timeIntervalSinceNow: 0.0)
+        let matchTime = checkTimeDate.timeIntervalSince(scoreTimer)
+        scoreTimer = checkTimeDate
+
+        if matchTime > 10 {
+            return 1
+        }
+
+        if matchTime > 5 {
+            return 2
+        }
+
+        return 4
     }
 }
