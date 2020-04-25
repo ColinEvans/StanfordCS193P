@@ -8,19 +8,6 @@
 
 import UIKit
 
-/// Each theme for the game
-/// Static `Enum` are preferred as you cannot accidently create a uses value type that does nothing (vs `Struct`)
-/// Works as a pure namespace
-enum GameThemes {
-    static let Halloween = ["🎃", "👻","💀", "🙀", "🌚", "🦿", "🧟‍♀️", "🧛🏻‍♀️", "🧙‍♂️"]
-    static let Xmas = ["☃️", "🧣","🎅🏻", "🤶🏼", "❄️", "🎁", "🍪", "🥛", "🎄"]
-    static let beach = ["☀️", "🏖","⛱", "🤽‍♂️", "🏊‍♂️", "🏄", "🌞", "🤙", "🤿"]
-    static let animals = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐼", "🐨", "🐯"]
-    static let school = ["📝", "✏️", "📚", "📏", "📖", "💻", "🥡", "🍻", "💸"]
-    static let happyFace = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "☺️", "🤣"]
-}
-
-
 /// View controller managing the UI for the gameboard
 class ConcentrationViewController: UIViewController {
 
@@ -28,25 +15,26 @@ class ConcentrationViewController: UIViewController {
     @IBOutlet var cardButtonViews: [UIButton]!
     @IBOutlet weak var flipCountLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var yinuoLabel: UILabel!
+    @IBOutlet weak var newGameButton: UIButton!
     
     // MARK: - Class Variables
     var game: Concentration!
-    private var emojiChoices = ConcentrationViewController.themes.randomElement() ?? GameThemes.Halloween
+    private var emojiChoices = [String]()
+    private var secondaryColor = UIColor()
     private var emoji = [Int: String]()
+    private let concentrationThemes = GameThemes.themes
     
-    // Possible themes loaded into the game
-    private static let themes = [
-        GameThemes.Halloween,
-        GameThemes.Xmas,
-        GameThemes.beach,
-        GameThemes.animals,
-        GameThemes.school,
-        GameThemes.happyFace
-    ]
-
+    
     // MARK: - Lifecycle Functions
     override func viewDidLoad() {
         game = Concentration(numberOfPairsOfCards: ((cardButtonViews.count + 1) / 2))
+        setThemes()
+
+        /// When we load the game the color must be set to the selected theme color
+        for button in cardButtonViews {
+            button.backgroundColor = secondaryColor
+        }
     }
     
     // MARK: - Methods
@@ -61,7 +49,7 @@ class ConcentrationViewController: UIViewController {
     /// Action that halts the current progress and restarts the game
     @IBAction func restartGame(_ sender: Any) {
         game.restart()
-        emojiChoices = ConcentrationViewController.themes.randomElement() ?? GameThemes.Halloween
+        setThemes()
         emoji.removeAll()
         updateViewFromModel()
     }
@@ -77,7 +65,7 @@ class ConcentrationViewController: UIViewController {
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             } else {
                 button.setTitle("", for: .normal)
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : #colorLiteral(red: 1, green: 0.1961485147, blue: 0.3654072285, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 0) : secondaryColor
             }
         }
         flipCountLabel.text = "Flips: \(game.flips)"
@@ -94,4 +82,14 @@ class ConcentrationViewController: UIViewController {
         return emoji[card.identifier] ?? "?"
     }
     
+    private func setThemes() {
+        guard let newTheme = concentrationThemes.randomElement() else { return }
+        emojiChoices = newTheme.emojis
+        view.backgroundColor =  newTheme.Colors.backgroundColor
+        secondaryColor = newTheme.Colors.cardFlipColor
+        flipCountLabel.textColor = secondaryColor
+        scoreLabel.textColor = secondaryColor
+        yinuoLabel.textColor = secondaryColor
+        newGameButton.setTitleColor(secondaryColor, for: .normal)
+    }
 }

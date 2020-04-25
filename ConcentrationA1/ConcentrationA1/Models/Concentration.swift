@@ -14,7 +14,24 @@ class Concentration {
     var cards = [Card]()
     var score = 0
     var flips = 0
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            let faceUpCards = cards.enumerated().filter({$1.isFacedUp}).map {$0.element}
+            if faceUpCards.count == 1 {
+                return cards.firstIndex(of: faceUpCards.first!)
+            }
+            return nil
+        }
+
+        set {
+            if let index = newValue {
+                for index in cards.indices {
+                    cards[index].isFacedUp = false
+                }
+                cards[index].isFacedUp = true
+            }
+        }
+    }
     
     // MARK: - Private variables
     private var seenCards = [Card]()
@@ -44,13 +61,7 @@ class Concentration {
                     checkScore(for: [index, matchIndex])
                 }
                 cards[index].isFacedUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             } else {
-                // no cards are face up || two cards are face up
-                for flippedDownIndex in cards.indices {
-                    cards[flippedDownIndex].isFacedUp = false
-                }
-                cards[index].isFacedUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }

@@ -15,6 +15,8 @@
 		399326E7244CDA4800AC262C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 399326E5244CDA4800AC262C /* LaunchScreen.storyboard */; };
 		399326F1244CDE6800AC262C /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399326F0244CDE6800AC262C /* Card.swift */; };
 		399326F3244CE03800AC262C /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399326F2244CE03800AC262C /* Concentration.swift */; };
+		399326F52454767800AC262C /* GameColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399326F42454767800AC262C /* GameColors.swift */; };
+		399326F724547AAE00AC262C /* GameThemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399326F624547AAE00AC262C /* GameThemes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		399326E8244CDA4800AC262C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		399326F0244CDE6800AC262C /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		399326F2244CE03800AC262C /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		399326F42454767800AC262C /* GameColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameColors.swift; sourceTree = "<group>"; };
+		399326F624547AAE00AC262C /* GameThemes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameThemes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 				399326DE244CDA4500AC262C /* ConcentrationViewController.swift */,
 				399326E0244CDA4500AC262C /* Main.storyboard */,
 				399326E8244CDA4800AC262C /* Info.plist */,
+				399326F42454767800AC262C /* GameColors.swift */,
+				399326F624547AAE00AC262C /* GameThemes.swift */,
 			);
 			path = ConcentrationA1;
 			sourceTree = "<group>";
@@ -162,7 +168,9 @@
 			files = (
 				399326DF244CDA4500AC262C /* ConcentrationViewController.swift in Sources */,
 				399326F3244CE03800AC262C /* Concentration.swift in Sources */,
+				399326F724547AAE00AC262C /* GameThemes.swift in Sources */,
 				399326DB244CDA4500AC262C /* AppDelegate.swift in Sources */,
+				399326F52454767800AC262C /* GameColors.swift in Sources */,
 				399326DD244CDA4500AC262C /* SceneDelegate.swift in Sources */,
 				399326F1244CDE6800AC262C /* Card.swift in Sources */,
 			);
@@ -308,7 +316,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J4WNCMKS3F;
 				INFOPLIST_FILE = ConcentrationA1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -316,6 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Colin.ConcentrationA1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -325,7 +336,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = J4WNCMKS3F;
 				INFOPLIST_FILE = ConcentrationA1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -333,6 +346,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Colin.ConcentrationA1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
